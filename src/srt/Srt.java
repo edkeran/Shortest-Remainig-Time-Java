@@ -19,6 +19,7 @@ public class Srt {
         //Parte Grafica De Los Procesos
         //EjecutarFrame a= new EjecutarFrame();
         //a.start();
+        new SolicitarDatos ();
     }
     
 }
