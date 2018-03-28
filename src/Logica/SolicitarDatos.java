@@ -5,6 +5,9 @@
  */
 package Logica;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author pc-smart
@@ -221,7 +224,21 @@ public class SolicitarDatos extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+        if(!"".equals(jTextField1.getText()) && !"".equals(jTextField3.getText()) && !"".equals(jTextField4.getText()) && !"".equals(jTextField5.getText()) && !"".equals(jTextField6.getText())){
+            Procesos [] prosceso= new Procesos [5];
+            prosceso[0].duracion = Integer.parseInt(jTextField1.getText());
+            prosceso[0].nombre = "A";
+            prosceso[1].duracion = Integer.parseInt(jTextField3.getText());
+            prosceso[1].nombre = "B";
+            prosceso[2].duracion = Integer.parseInt(jTextField4.getText());
+            prosceso[2].nombre = "C";
+            prosceso[3].duracion = Integer.parseInt(jTextField5.getText());
+            prosceso[3].nombre = "D";
+            prosceso[4].duracion = Integer.parseInt(jTextField6.getText());
+            prosceso[4].nombre = "E";
+        }else{
+            JOptionPane.showMessageDialog(null,"Error los campos no estan llenos.");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
