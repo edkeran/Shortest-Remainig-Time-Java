@@ -26,22 +26,26 @@ public class Calcular {
                 procesos_ejecucion.add(procesos[apuntador]);
                 apuntador++;
             }
-            if(procesos_ejecucion.size() > 1){
-                //Principal
-                if (procesos_ejecucion.get(0).duracion==0){
-                    System.out.println("Se Termino El Proceso:"+procesos_ejecucion.get(0).getNombre());
-                    procesos_ejecucion.remove(0);
-                    terminados++;
-                }
+            if (procesos_ejecucion.get(0).duracion==0){
+                System.out.println("Se Termino El Proceso:"+procesos_ejecucion.get(0).getNombre());
+                procesos_ejecucion.remove(0);
+                terminados++;
+            }
+            if (procesos_ejecucion.size()>1){
+                recorrerProcesos_Ejecucion();
+            }   
+           //Principal
+           
                 //if(procesos_ejecucion.get(0).duracion > procesos_ejecucion.get(procesos_ejecucion.size()-1).duracion){
                   //  Procesos aux;
                    // aux=procesos_ejecucion.get(0);
                    // procesos_ejecucion.remove(0);
                    // procesos_ejecucion.add(aux);
                 //}
-                recorrerProcesos_Ejecucion();
-            }
-            procesos_ejecucion.get(0).duracion--;
+             if (procesos_ejecucion.size()>0){
+                procesos_ejecucion.get(0).duracion--;
+             }
+            
         }
     }
     
@@ -60,6 +64,8 @@ public class Calcular {
         }
         aux2=procesos_ejecucion.get(0);
         procesos_ejecucion.remove(0);
+        procesos_ejecucion.remove(aux);
+        procesos_ejecucion.add(aux2);
         procesos_ejecucion.add(0, aux);
         
     }
