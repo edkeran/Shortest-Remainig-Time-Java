@@ -28,11 +28,14 @@ public void Ejecutar(){
             apuntador++;
         }
         if(procesos_ejecucion.size() > 1){
-            ///if(procesos_ejecucion.get(0).duracion < procesos_ejecucion.get(procesos_ejecucion.size() -1)){
-                
-            //}
+            //Principal
+            if(procesos_ejecucion.get(0).duracion > procesos_ejecucion.get(procesos_ejecucion.size()-1).duracion){
+                    Procesos aux;
+                    aux=procesos_ejecucion.get(0);
+                    procesos_ejecucion.remove(0);
+                    procesos_ejecucion.add(aux);
+                }
+            }
         }
-         
-    }
-}    
+    }    
 }
