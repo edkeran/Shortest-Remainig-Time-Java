@@ -62,10 +62,12 @@ public class Calcular {
                 aux=procesos1;
             }
         }
-        aux2=procesos_ejecucion.get(0);
-        procesos_ejecucion.remove(0);
+        if (procesos_ejecucion.get(0)!=aux){
+            aux2=procesos_ejecucion.get(0);
+            procesos_ejecucion.remove(0);
+            procesos_ejecucion.add(aux2);
+        }
         procesos_ejecucion.remove(aux);
-        procesos_ejecucion.add(aux2);
         procesos_ejecucion.add(0, aux);
         
     }
