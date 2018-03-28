@@ -39,6 +39,7 @@ public class Calcular {
                    // procesos_ejecucion.remove(0);
                    // procesos_ejecucion.add(aux);
                 //}
+                recorrerProcesos_Ejecucion();
             }
             procesos_ejecucion.get(0).duracion--;
         }
@@ -47,6 +48,7 @@ public class Calcular {
     public void recorrerProcesos_Ejecucion(){
         //ForEach para determinar proceso mas corto
         Procesos aux = null;
+        Procesos aux2=null;
         for (Procesos procesos1 : procesos_ejecucion) {
             if (aux!=null){
                 if (procesos1.getDuracion()<aux.getDuracion()){
@@ -56,6 +58,10 @@ public class Calcular {
                 aux=procesos1;
             }
         }
+        aux2=procesos_ejecucion.get(0);
+        procesos_ejecucion.remove(0);
+        procesos_ejecucion.add(0, aux);
+        
     }
 
     
