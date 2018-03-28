@@ -20,22 +20,43 @@ public class Calcular {
         procesos = a;
     }
     
-public void Ejecutar(){
-    
-    while(terminados<5){
-        if (apuntador<5){
-            procesos_ejecucion.add(procesos[apuntador]);
-            apuntador++;
-        }
-        if(procesos_ejecucion.size() > 1){
-            //Principal
-            if(procesos_ejecucion.get(0).duracion > procesos_ejecucion.get(procesos_ejecucion.size()-1).duracion){
-                    Procesos aux;
-                    aux=procesos_ejecucion.get(0);
+    public void Ejecutar(){
+        while(terminados<5){
+            if (apuntador<5){
+                procesos_ejecucion.add(procesos[apuntador]);
+                apuntador++;
+            }
+            if(procesos_ejecucion.size() > 1){
+                //Principal
+                if (procesos_ejecucion.get(0).duracion==0){
+                    System.out.println("Se Termino El Proceso:"+procesos_ejecucion.get(0).getNombre());
                     procesos_ejecucion.remove(0);
-                    procesos_ejecucion.add(aux);
+                    terminados++;
                 }
+                //if(procesos_ejecucion.get(0).duracion > procesos_ejecucion.get(procesos_ejecucion.size()-1).duracion){
+                  //  Procesos aux;
+                   // aux=procesos_ejecucion.get(0);
+                   // procesos_ejecucion.remove(0);
+                   // procesos_ejecucion.add(aux);
+                //}
+            }
+            procesos_ejecucion.get(0).duracion--;
+        }
+    }
+    
+    public void recorrerProcesos_Ejecucion(){
+        //ForEach para determinar proceso mas corto
+        Procesos aux = null;
+        for (Procesos procesos1 : procesos_ejecucion) {
+            if (aux!=null){
+                if (procesos1.getDuracion()<aux.getDuracion()){
+                    aux=procesos1;
+                }
+            }else{
+                aux=procesos1;
             }
         }
-    }    
+    }
+
+    
 }
