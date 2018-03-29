@@ -5,10 +5,12 @@
  */
 package srt;
 
+import Logica.Procesos;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,6 +25,16 @@ public class EjecutarFrame implements Runnable{
     private Display a;
     private BufferStrategy bs;
     private Graphics g;
+    int apuntador = 0;
+    int terminados = 0;
+    ArrayList <Procesos> procesos_ejecucion = new ArrayList <Procesos>();
+    Procesos [] procesos;
+
+    public EjecutarFrame(Procesos []a) {
+        procesos = a;
+    }
+    
+    
     
     private void init(){
           a  = new Display("Frame SRT");
@@ -30,6 +42,44 @@ public class EjecutarFrame implements Runnable{
     
     private void tick(){
         //Logica Del Codigo
+         if (apuntador<5){
+                procesos_ejecucion.add(procesos[apuntador]);
+                apuntador++;
+            }
+            if (procesos_ejecucion.get(0).getDuracion()==0){
+                System.out.println("Se Termino El Proceso:"+procesos_ejecucion.get(0).getNombre());
+                procesos_ejecucion.remove(0);
+                terminados++;
+            }
+            if (procesos_ejecucion.size()>1){
+                recorrerProcesos_Ejecucion();
+            }   
+             if (procesos_ejecucion.size()>0){
+                  procesos_ejecucion.get(0).setDuracion(procesos_ejecucion.get(0).getDuracion()-1);
+             }
+    }
+    
+    public void recorrerProcesos_Ejecucion(){
+        //ForEach para determinar proceso mas corto
+        Procesos aux = null;
+        Procesos aux2=null;
+        for (Procesos procesos1 : procesos_ejecucion) {
+            if (aux!=null){
+                if (procesos1.getDuracion()<aux.getDuracion()){
+                    aux=procesos1;
+                }
+            }else{
+                aux=procesos1;
+            }
+        }
+        if (procesos_ejecucion.get(0)!=aux){
+            aux2=procesos_ejecucion.get(0);
+            procesos_ejecucion.remove(0);
+            procesos_ejecucion.add(aux2);
+        }
+        procesos_ejecucion.remove(aux);
+        procesos_ejecucion.add(0, aux);
+        
     }
     
     private void render(){
@@ -83,7 +133,7 @@ public class EjecutarFrame implements Runnable{
     @Override
     public void run() {
        init();
-        while ((flag)){
+        while ((terminados<5)){
             tick();
             render();
         }
