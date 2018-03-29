@@ -226,6 +226,8 @@ public class SolicitarDatos extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(!"".equals(jTextField1.getText()) && !"".equals(jTextField3.getText()) && !"".equals(jTextField4.getText()) && !"".equals(jTextField5.getText()) && !"".equals(jTextField6.getText())){
             Procesos [] prosceso= new Procesos [5];
+            //SE HICIERON CAMBIOS
+            prosceso[0]= new Procesos();prosceso[1]= new Procesos();prosceso[2]= new Procesos();prosceso[3]= new Procesos();prosceso[4]= new Procesos();
             prosceso[0].duracion = Integer.parseInt(jTextField1.getText());
             prosceso[0].nombre = "A";
             prosceso[1].duracion = Integer.parseInt(jTextField3.getText());
@@ -236,6 +238,8 @@ public class SolicitarDatos extends javax.swing.JFrame {
             prosceso[3].nombre = "D";
             prosceso[4].duracion = Integer.parseInt(jTextField6.getText());
             prosceso[4].nombre = "E";
+            Calcular exe= new Calcular(prosceso);
+            exe.Ejecutar();
         }else{
             JOptionPane.showMessageDialog(null,"Error los campos no estan llenos.");
         }
