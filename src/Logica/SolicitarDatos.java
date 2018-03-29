@@ -7,6 +7,7 @@ package Logica;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import srt.EjecutarFrame;
 
 /**
  *
@@ -238,8 +239,8 @@ public class SolicitarDatos extends javax.swing.JFrame {
             prosceso[3].nombre = "D";
             prosceso[4].duracion = Integer.parseInt(jTextField6.getText());
             prosceso[4].nombre = "E";
-            Calcular exe= new Calcular(prosceso);
-            exe.Ejecutar();
+            EjecutarFrame a= new EjecutarFrame(prosceso);
+            a.start();
         }else{
             JOptionPane.showMessageDialog(null,"Error los campos no estan llenos.");
         }

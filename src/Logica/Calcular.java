@@ -34,14 +34,6 @@ public class Calcular {
             if (procesos_ejecucion.size()>1){
                 recorrerProcesos_Ejecucion();
             }   
-           //Principal
-           
-                //if(procesos_ejecucion.get(0).duracion > procesos_ejecucion.get(procesos_ejecucion.size()-1).duracion){
-                  //  Procesos aux;
-                   // aux=procesos_ejecucion.get(0);
-                   // procesos_ejecucion.remove(0);
-                   // procesos_ejecucion.add(aux);
-                //}
              if (procesos_ejecucion.size()>0){
                 procesos_ejecucion.get(0).duracion--;
              }
