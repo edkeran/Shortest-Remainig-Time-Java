@@ -132,7 +132,7 @@ public class EjecutarFrame implements Runnable{
             int posicion=0;
             g.setColor((Color) diccionario.get(procesos_ejecutados.get(ayu)));
             g.fillRect(x, (int) diccionario2.get(procesos_ejecutados.get(ayu)), 20, 20);
-            for (int i=0;i<4;i++){
+            for (int i=0;i<5;i++){
                 g.setColor(Color.BLACK);
                 if (posicion!=(int) diccionario2.get(procesos_ejecutados.get(ayu))){
                      g.fillRect(x, posicion, 20, 20);
@@ -151,6 +151,11 @@ public class EjecutarFrame implements Runnable{
         while ((terminados<5)){
             tick();
             render();
+           try {
+               Thread.sleep(1000);
+           } catch (InterruptedException ex) {
+               Logger.getLogger(EjecutarFrame.class.getName()).log(Level.SEVERE, null, ex);
+           }
         }
         stop();
     }
