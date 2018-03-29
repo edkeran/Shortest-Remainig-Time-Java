@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,9 +30,15 @@ public class EjecutarFrame implements Runnable{
     int terminados = 0;
     ArrayList <Procesos> procesos_ejecucion = new ArrayList <Procesos>();
     Procesos [] procesos;
-
+    HashMap diccionario = new HashMap();
+    HashMap diccionario2= new HashMap();
+    ArrayList <String> procesos_ejecutados= new ArrayList <String>();
+    String actual;
+    
     public EjecutarFrame(Procesos []a) {
         procesos = a;
+        diccionario.put("A", Color.RED); diccionario.put("B", Color.ORANGE); diccionario.put("C", Color.PINK); diccionario.put("D", Color.WHITE); diccionario.put("E", Color.CYAN);
+        diccionario2.put("A", 0);diccionario2.put("B", 100);diccionario2.put("C", 200);diccionario2.put("D", 300);diccionario2.put("E", 400);
     }
     
     
@@ -55,7 +62,10 @@ public class EjecutarFrame implements Runnable{
                 recorrerProcesos_Ejecucion();
             }   
              if (procesos_ejecucion.size()>0){
-                  procesos_ejecucion.get(0).setDuracion(procesos_ejecucion.get(0).getDuracion()-1);
+                 System.out.println("Proceso Actual"+procesos_ejecucion.get(0).getNombre());
+                 procesos_ejecutados.add(procesos_ejecucion.get(0).getNombre());
+                 actual=procesos_ejecucion.get(0).getNombre();
+                 procesos_ejecucion.get(0).setDuracion(procesos_ejecucion.get(0).getDuracion()-1);
              }
     }
     
@@ -97,7 +107,6 @@ public class EjecutarFrame implements Runnable{
         dibujarProcesos();
         bs.show();
         g.dispose();
-        if (x<730)x++;
     }
     
     
@@ -117,16 +126,22 @@ public class EjecutarFrame implements Runnable{
     }
     
     private void dibujarCuadrados(){
-         g.setColor(Color.red);
-         g.fillRect(x, 0, 70, 70);
-         g.setColor(Color.ORANGE);
-         g.fillRect(x, 100, 70, 70);
-         g.setColor(Color.PINK);
-         g.fillRect(x, 200, 70, 70);
-         g.setColor(Color.WHITE);
-         g.fillRect(x, 300, 70, 70);
-         g.setColor(Color.CYAN);
-         g.fillRect(x, 400, 70, 70);   
+        int ayu=0;
+        x=730;
+        while (ayu<procesos_ejecutados.size()){
+            int posicion=0;
+            g.setColor((Color) diccionario.get(procesos_ejecutados.get(ayu)));
+            g.fillRect(x, (int) diccionario2.get(procesos_ejecutados.get(ayu)), 20, 20);
+            for (int i=0;i<4;i++){
+                g.setColor(Color.BLACK);
+                if (posicion!=(int) diccionario2.get(procesos_ejecutados.get(ayu))){
+                     g.fillRect(x, posicion, 20, 20);
+                }
+                posicion+=100;
+            }
+            ayu++;
+            x-=30;
+        }
     }
     
     
