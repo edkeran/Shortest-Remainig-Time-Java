@@ -26,14 +26,15 @@ public class EjecutarFrame implements Runnable{
     private Display a;
     private BufferStrategy bs;
     private Graphics g;
-    int apuntador = 0;
-    int terminados = 0;
-    ArrayList <Procesos> procesos_ejecucion = new ArrayList <Procesos>();
-    Procesos [] procesos;
-    HashMap diccionario = new HashMap();
-    HashMap diccionario2= new HashMap();
-    ArrayList <String> procesos_ejecutados= new ArrayList <String>();
-    String actual;
+    private int apuntador = 0;
+    private int terminados = 0;
+    private ArrayList <Procesos> procesos_ejecucion = new ArrayList <Procesos>();
+    private Procesos [] procesos;
+    private HashMap diccionario = new HashMap();
+    private HashMap diccionario2= new HashMap();
+    private ArrayList <String> procesos_ejecutados= new ArrayList <String>();
+    private String actual;
+    private String [] finalizados= new String [5];
     
     public EjecutarFrame(Procesos []a) {
         procesos = a;
@@ -55,6 +56,7 @@ public class EjecutarFrame implements Runnable{
             }
             if (procesos_ejecucion.get(0).getDuracion()==0){
                 System.out.println("Se Termino El Proceso:"+procesos_ejecucion.get(0).getNombre());
+                finalizados[terminados]=procesos_ejecucion.get(0).getNombre();
                 procesos_ejecucion.remove(0);
                 terminados++;
             }
@@ -105,6 +107,7 @@ public class EjecutarFrame implements Runnable{
         
         dibujarCuadrados();
         dibujarProcesos();
+        pintar_terminados();
         bs.show();
         g.dispose();
     }
@@ -123,6 +126,8 @@ public class EjecutarFrame implements Runnable{
         g.drawString("Proceso D", 30,320);
         g.setColor(Color.CYAN);
         g.drawString("Proceso E", 30, 420);
+        g.setColor(Color.DARK_GRAY);
+        g.drawString("Procesos Terminados:", 30, 550);
     }
     
     private void dibujarCuadrados(){
@@ -144,6 +149,15 @@ public class EjecutarFrame implements Runnable{
         }
     }
     
+    private void pintar_terminados(){
+        int i=0,pos_x=300;
+        while (i<finalizados.length){
+            g.setColor(Color.GREEN);
+            if (finalizados[i]!=null)g.drawString(finalizados[i], pos_x, 550);
+            pos_x+=100;
+            i++;
+        }
+    }
     
     @Override
     public void run() {
