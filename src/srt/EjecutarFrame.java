@@ -132,7 +132,7 @@ public class EjecutarFrame implements Runnable{
     
     private void dibujarCuadrados(){
         int ayu=0;
-        x=730;
+        x=780;
         while (ayu<procesos_ejecutados.size()){
             int posicion=0;
             g.setColor((Color) diccionario.get(procesos_ejecutados.get(ayu)));
